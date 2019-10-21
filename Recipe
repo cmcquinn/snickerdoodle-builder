@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -e # exit on error
+set -x # echo commands
+
 ROOTDIR='/tmp/multistrap'
 CONFIGDIR='${PWD}/configs'
 UTILSDIR='${PWD}/utils'
@@ -8,7 +11,7 @@ UTILSDIR='${PWD}/utils'
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 43DDF224
 
 # multistrap
-multistrap -f rootfs.conf -d ${ROOTDIR}
+multistrap -f ${CONFIGDIR}/rootfs.conf -d ${ROOTDIR}
 
 # prepare to chroot
 cp $(which qemu-arm-static) ${ROOTDIR}
