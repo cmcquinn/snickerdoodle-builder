@@ -1,1 +1,28 @@
-#!/usr/bin/env python
+#!/bin/bash
+
+ROOTDIR='/tmp/multistrap'
+CONFIGDIR='${PWD}/configs'
+UTILSDIR='${PWD}/utils'
+
+# add machinekit keys to apt
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 43DDF224
+
+# multistrap
+multistrap -f rootfs.conf -d ${ROOTDIR}
+
+# prepare to chroot
+cp $(which qemu-arm-static) ${ROOTDIR}
+mount -o bind /dev/ ${ROOTDIR}/dev/
+
+# run configurescript
+LC_ALL=C LANGUAGE=C LANG=C chroot ${ROOTDIR} /bin/bash ${UTILSDIR}/configscript.sh
+
+# create disk image
+
+# partition disk image
+
+# populate disk image
+
+# install additional files under /etc
+
+# archive the rootfs and upload to github
