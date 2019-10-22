@@ -9,7 +9,7 @@ UTILSDIR="${PWD}/utils"
 
 # add machinekit keys to trusted keys dir
 mkdir -p ${ROOTDIR}/etc/apt/trusted.gpg.d
-curl http://deb.machinekit.io/43DDF224.gpg.key | apt-key --keyring ${ROOTDIR}/etc/apt/trusted.gpg.d/machinekit.gpg add -
+apt-key --keyring "${ROOTDIR}/etc/apt/trusted.gpg.d/machinekit.gpg" adv --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv 43DDF224
 
 # multistrap
 multistrap -f ${CONFIGDIR}/rootfs.conf -d ${ROOTDIR}
