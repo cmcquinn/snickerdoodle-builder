@@ -16,10 +16,16 @@ multistrap -f ${CONFIGDIR}/rootfs.conf -d ${ROOTDIR}
 
 # prepare to chroot
 cp $(which qemu-arm-static) ${ROOTDIR}
-mount -o bind /dev/ ${ROOTDIR}/dev/
+mount -t proc /proc ${ROOTDIR}/proc
+mount -o bind /dev ${ROOTDIR}/dev
+mount -o bind /dev/pts ${ROOTDIR}/dev/pts
+mount -o bind /sys ${ROOTDIR}/sys
 
 # run configurescript
 LC_ALL=C LANGUAGE=C LANG=C chroot ${ROOTDIR} /bin/bash ${UTILSDIR}/configscript.sh
+
+# unbind chroot mounts
+umount ${ROOTDIR}/{sys,proc,dev/pts,dev}
 
 # create disk image
 
