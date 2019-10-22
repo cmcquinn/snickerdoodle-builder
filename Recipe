@@ -3,9 +3,10 @@
 set -e # exit on error
 set -x # echo commands
 
+PROJECTDIR="${PWD}"
 ROOTDIR="/tmp/multistrap"
-CONFIGDIR="${PWD}/configs"
-UTILSDIR="${PWD}/utils"
+CONFIGDIR="${PROJECTDIR}/configs"
+UTILSDIR="${PROJECTDIR}/utils"
 
 # add machinekit keys to trusted keys dir
 mkdir -p ${ROOTDIR}/etc/apt/trusted.gpg.d
@@ -20,12 +21,13 @@ mount -t proc /proc ${ROOTDIR}/proc
 mount -o bind /dev ${ROOTDIR}/dev
 mount -o bind /dev/pts ${ROOTDIR}/dev/pts
 mount -o bind /sys ${ROOTDIR}/sys
+mount -o bind ${PROJECTDIR} ${ROOTDIR}/${PROJECTDIR}
 
 # run configurescript
 LC_ALL=C LANGUAGE=C LANG=C chroot ${ROOTDIR} /bin/bash ${CONFIGDIR}/configscript.sh
 
 # unbind chroot mounts
-umount ${ROOTDIR}/{sys,proc,dev/pts,dev}
+umount ${ROOTDIR}/{sys,proc,dev/pts,dev,${PROJECTDIR}}
 
 # create disk image
 
