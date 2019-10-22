@@ -8,6 +8,6 @@ project=snickerdoodle-builder
 
 docker pull ${docker_image}
 docker rm ${project} &> /dev/null || true
-docker run --name ${project} -i \
+docker run --privileged--name ${project} -i \
      -v "${PWD}:/${project}" ${docker_image} \
      /bin/bash -c "cd ${project}; ./Recipe"
