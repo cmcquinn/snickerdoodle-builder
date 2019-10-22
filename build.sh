@@ -6,7 +6,7 @@ set -x # echo commands
 docker_image=cmcquinn/snickerdoodle-docker:rootfs
 project=snickerdoodle-builder
 
-docker run multiarch/qemu-user-static:register
+docker run --privileged multiarch/qemu-user-static:register
 docker pull ${docker_image}
 docker rm ${project} &> /dev/null || true
 docker run --privileged --name ${project} -i \
