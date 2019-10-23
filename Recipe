@@ -17,6 +17,7 @@ multistrap -f ${CONFIGDIR}/rootfs.conf -d ${ROOTDIR}
 
 # prepare to chroot
 cp $(which qemu-arm-static) ${ROOTDIR}/usr/bin
+mkdir -p ${ROOTDIR}/${PROJECTDIR}
 mount -t proc /proc ${ROOTDIR}/proc
 mount -o bind /dev ${ROOTDIR}/dev
 mount -o bind /dev/pts ${ROOTDIR}/dev/pts
