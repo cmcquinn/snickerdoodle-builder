@@ -35,6 +35,8 @@ bootfs = parted.FileSystem(type='fat32', geometry=bootgeom)
 bootpart = parted.Partition(
     disk=disk, type=parted.PARTITION_NORMAL, fs=bootfs, geometry=bootgeom)
 bootpart.name = 'boot'
+# if (bootpart.getFlag(parted.PARTITION_MSFT_DATA)):
+#     bootpart.unsetFlag(parted.PARTITION_MSFT_DATA)
 disk.addPartition(partition=bootpart,
                   constraint=device.optimalAlignedConstraint)
 disk.commit()
@@ -61,7 +63,7 @@ result = subprocess.run(
 devpath = result.stdout.strip()  # output from losetup gives path to loopback device
 print("loopback device created at {}".format(devpath))
 print('Formatting partitions...')
-subprocess.run('mkfs.fat {}p1'.format(devpath).split(),
-               check=True)  # format first partition to FAT
+subprocess.run('mkfs.fat -F 32 {}p1'.format(devpath).split(),
+               check=True)  # format first partition to FAT32
 subprocess.run('mkfs.ext4 {}p2'.format(devpath).split(),
                check=True)  # format second parition to ext4
