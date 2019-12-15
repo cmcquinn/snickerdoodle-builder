@@ -27,7 +27,7 @@ mount -o bind ${PROJECTDIR} ${ROOTDIR}/${PROJECTDIR}
 LC_ALL=C LANGUAGE=C LANG=C chroot ${ROOTDIR} /bin/bash ${CONFIGDIR}/configscript.sh
 
 # unbind chroot mounts
-umount ${ROOTDIR}/{sys,proc,dev/pts,dev,${PROJECTDIR}}
+umount ${ROOTDIR}/{sys,dev/pts,dev,${PROJECTDIR}}
 
 # create disk image
 
