@@ -3,44 +3,45 @@
 set -e # exit on error
 set -x # echo commands
 
-PROJECTDIR="${PWD}"
-ROOTDIR="/tmp/multistrap"
-CONFIGDIR="${PROJECTDIR}/configs"
-UTILSDIR="${PROJECTDIR}/utils"
+export PROJECTDIR="${PWD}"
+export ROOTFS="/tmp/multistrap"
+export CONFIGDIR="${PROJECTDIR}/configs"
+export UTILSDIR="${PROJECTDIR}/utils"
+export QTDIR="${PROJECTDIR}/qt"
 
 # add machinekit keys to trusted keys dir
-mkdir -p ${ROOTDIR}/etc/apt/trusted.gpg.d
-apt-key --keyring "${ROOTDIR}/etc/apt/trusted.gpg.d/machinekit.gpg" adv --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv 43DDF224
+mkdir -p ${ROOTFS}/etc/apt/trusted.gpg.d
+apt-key --keyring "${ROOTFS}/etc/apt/trusted.gpg.d/machinekit.gpg" adv --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv 43DDF224
 
 # multistrap
-multistrap -f ${CONFIGDIR}/rootfs.conf -d ${ROOTDIR}
+multistrap -f ${CONFIGDIR}/rootfs.conf -d ${ROOTFS}
 
 # prepare to chroot
-cp $(which qemu-arm-static) ${ROOTDIR}/usr/bin
-mkdir -p ${ROOTDIR}/${PROJECTDIR}
-mount -o bind /dev ${ROOTDIR}/dev
-mount -o bind /dev/pts ${ROOTDIR}/dev/pts
-mount -o bind /sys ${ROOTDIR}/sys
-mount -o bind ${PROJECTDIR} ${ROOTDIR}/${PROJECTDIR}
+cp $(which qemu-arm-static) ${ROOTFS}/usr/bin
+mkdir -p ${ROOTFS}/${PROJECTDIR}
+mount -o bind /dev ${ROOTFS}/dev
+mount -o bind /dev/pts ${ROOTFS}/dev/pts
+mount -o bind /sys ${ROOTFS}/sys
+mount -o bind ${PROJECTDIR} ${ROOTFS}/${PROJECTDIR}
 
 # run configurescript
-LC_ALL=C LANGUAGE=C LANG=C chroot ${ROOTDIR} /bin/bash ${CONFIGDIR}/configscript.sh
+LC_ALL=C LANGUAGE=C LANG=C chroot ${ROOTFS} /bin/bash ${CONFIGDIR}/configscript.sh
 
 # unbind chroot mounts
-umount ${ROOTDIR}/{sys,dev/pts,dev,${PROJECTDIR}}
+umount ${ROOTFS}/{sys,dev/pts,dev,${PROJECTDIR}}
+
+# build Qt5
+${QTDIR}/qtbuild.sh
 
 # check for pyparted
-if [ python -c "import parted" ]; then
+if [ python3 -c "import parted" ]; then
     echo "Found pyparted"
 else
-    apt install libparted-dev
-    pip install -r requirements.txt
+    pip3 install -r pyparted
 fi
 
-# create disk image
-
-
-# partition disk image
+# create and partition disk image
+${UTILSDIR}/diskimage.py /tmp/multistrap
 
 # populate disk image
 
