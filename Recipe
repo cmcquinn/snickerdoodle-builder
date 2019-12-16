@@ -29,7 +29,16 @@ LC_ALL=C LANGUAGE=C LANG=C chroot ${ROOTDIR} /bin/bash ${CONFIGDIR}/configscript
 # unbind chroot mounts
 umount ${ROOTDIR}/{sys,dev/pts,dev,${PROJECTDIR}}
 
+# check for pyparted
+if [ python -c "import parted" ]; then
+    echo "Found pyparted"
+else
+    apt install libparted-dev
+    pip install -r requirements.txt
+fi
+
 # create disk image
+
 
 # partition disk image
 
