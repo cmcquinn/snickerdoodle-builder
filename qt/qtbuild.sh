@@ -49,6 +49,7 @@ git clone https://github.com/qt/qt5.git $QTSRCDIR
 cd $QTSRCDIR
 git checkout $QTVERSION
 perl init-repository --module-subset=$MODULESUBSET
+mkdir -p $QTSRCDIR/$MKSPECDIR
 cp ${PROJECTDIR}/qt/{qmake.conf,qplatformdefs.h} $QTSRCDIR/$MKSPECDIR
 
 # prepare to build
