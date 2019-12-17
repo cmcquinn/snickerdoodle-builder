@@ -15,10 +15,11 @@ MODULESUBSET="essential,-qtwebengine,qtdeclarative,qtquickcontrols,qtquickcontro
 SKIPMODULES="-skip qt3d \
 	-skip qtcanvas3d \
 	-skip qtconnectivity \
-	-skip qtenginio \
 	-skip qtfeedback \
 	-skip qtgraphicaleffects \
 	-skip qtlocation \
+	-skip qt purchasing \
+	-skip qtqa \
 	-skip qtpim \
 	-skip qtscript \
 	-skip qtsensors \
