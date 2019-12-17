@@ -3,11 +3,8 @@
 set -e # exit on error
 set -x # echo commands
 
-# get path to containing folder
-SCRIPTDIR=$( realpath "$0"  ) && dirname "$SCRIPTDIR"
-
 # setup environment
-source ${SCRIPTDIR}/env.sh
+source ${QTDIR}/env.sh
 
 # get the sources
 git clone https://github.com/qt/qt5.git $QTSRCDIR
