@@ -42,7 +42,7 @@ CONFIGUREARGS="-confirm-license \
 	-device \
 	linux-arm-xilinx-zynq-g++ \
 	-device-option \
-	CROSS_COMPILE=arm-linux-gnueabi- \
+	CROSS_COMPILE=arm-linux-gnueabihf- \
     -sysroot ${ROOTFS}"
 
 # get the sources
