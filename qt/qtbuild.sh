@@ -12,23 +12,23 @@ QTVERSION="v5.14.0"
 MODULESUBSET="essential,-qtwebengine,qtdeclarative,qtquickcontrols,qtquickcontrols2"
 
 # modules not to build
-SKIPMODULES="qt3d \
-	qtcanvas3d \
-	qtconnectivity \
-	qtenginio \
-	qtfeedback \
-	qtgraphicaleffects \
-	qtlocation \
-	qtpim \
-	qtscript \
-	qtsensors \
-	qtserialport \
-	qtsystems \
-	qtwayland \
-	qtwebchannel \
-	qtwebengine \
-	qtwebsockets \
-	qtxmlpatterns"
+SKIPMODULES="-skip qt3d \
+	-skip qtcanvas3d \
+	-skip qtconnectivity \
+	-skip qtenginio \
+	-skip qtfeedback \
+	-skip qtgraphicaleffects \
+	-skip qtlocation \
+	-skip qtpim \
+	-skip qtscript \
+	-skip qtsensors \
+	-skip qtserialport \
+	-skip qtsystems \
+	-skip qtwayland \
+	-skip qtwebchannel \
+	-skip qtwebengine \
+	-skip qtwebsockets \
+	-skip qtxmlpatterns"
 CONFIGUREARGS="-confirm-license \
 	-opensource \
 	-release \
@@ -57,7 +57,7 @@ mkdir -p $QTBUILDDIR
 cd $QTBUILDDIR
 
 # run configure
-$QTSRCDIR/configure $CONFIGUREARGS -skip $SKIPMODULES
+$QTSRCDIR/configure $CONFIGUREARGS $SKIPMODULES
 
 # run build
 make -j`nproc`
