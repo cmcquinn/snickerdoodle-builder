@@ -9,7 +9,7 @@ MKSPECDIR="qtbase/mkspecs/devices/linux-arm-xilinx-zynq-g++"
 QTVERSION="v5.14.0"
 
 # subset of modules to pull down from git
-MODULESUBSET="essential,-qtwebengine,qtdeclarative,qtquickcontrols,qtquickcontrols2,qtquick1"
+MODULESUBSET="essential,-qtwebengine,qtdeclarative,qtquickcontrols,qtquickcontrols2"
 
 # modules not to build
 SKIPMODULES="qt3d \
