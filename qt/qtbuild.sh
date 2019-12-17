@@ -18,7 +18,7 @@ SKIPMODULES="-skip qt3d \
 	-skip qtfeedback \
 	-skip qtgraphicaleffects \
 	-skip qtlocation \
-	-skip qt purchasing \
+	-skip qtpurchasing \
 	-skip qtqa \
 	-skip qtpim \
 	-skip qtscript \
