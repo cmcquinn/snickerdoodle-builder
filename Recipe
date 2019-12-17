@@ -3,11 +3,8 @@
 set -e # exit on error
 set -x # echo commands
 
-export PROJECTDIR="${PWD}"
-export ROOTFS="/tmp/multistrap"
-export CONFIGDIR="${PROJECTDIR}/configs"
-export UTILSDIR="${PROJECTDIR}/utils"
-export QTDIR="${PROJECTDIR}/qt"
+# setup environment
+source ./env.sh
 
 # add machinekit keys to trusted keys dir
 mkdir -p ${ROOTFS}/etc/apt/trusted.gpg.d
@@ -22,13 +19,13 @@ mkdir -p ${ROOTFS}/${PROJECTDIR}
 mount -o bind /dev ${ROOTFS}/dev
 mount -o bind /dev/pts ${ROOTFS}/dev/pts
 mount -o bind /sys ${ROOTFS}/sys
-mount -o bind ${PROJECTDIR} ${ROOTFS}/${PROJECTDIR}
+mount -o bind ${PROJECTDIR} ${ROOTFS}/${PROJECTBASE}
 
 # run configurescript
 LC_ALL=C LANGUAGE=C LANG=C chroot ${ROOTFS} /bin/bash ${CONFIGDIR}/configscript.sh
 
 # unbind chroot mounts
-umount ${ROOTFS}/{sys,dev/pts,dev,${PROJECTDIR}}
+umount ${ROOTFS}/{sys,dev/pts,dev,${PROJECTBASE}}
 
 # build Qt5
 ${QTDIR}/qtbuild.sh
