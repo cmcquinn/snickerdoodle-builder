@@ -50,7 +50,7 @@ mkdir -p $QTSRCDIR/$MKSPECDIR
 cp ${PROJECTDIR}/qt/{qmake.conf,qplatformdefs.h} $QTSRCDIR/$MKSPECDIR
 cd $QTSRCDIR
 git checkout $QTVERSION
-perl init-repository --module-subset=MODULESUBSET
+perl init-repository --module-subset=$MODULESUBSET
 
 # prepare to build
 mkdir -p $QTBUILDDIR
