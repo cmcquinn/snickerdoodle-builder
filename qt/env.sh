@@ -13,6 +13,8 @@ export CONFIGUREARGS="-confirm-license \
 	-opensource \
 	-release \
 	-xcb \
+	-no-opengl \
+	-no-feature-accessibility \
 	-nomake \
 	tests \
 	-nomake \
@@ -34,12 +36,13 @@ export SKIPMODULES="-skip qt3d \
 	-skip qtfeedback \
 	-skip qtgraphicaleffects \
 	-skip qtlocation \
+	-skip qtpim \
 	-skip qtpurchasing \
 	-skip qtqa \
-	-skip qtpim \
 	-skip qtscript \
 	-skip qtsensors \
 	-skip qtserialport \
+	-skip qtsql \
 	-skip qtsystems \
 	-skip qtwayland \
 	-skip qtwebchannel \
