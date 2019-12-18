@@ -42,7 +42,6 @@ export SKIPMODULES="-skip qt3d \
 	-skip qtscript \
 	-skip qtsensors \
 	-skip qtserialport \
-	-skip qtsql \
 	-skip qtsystems \
 	-skip qtwayland \
 	-skip qtwebchannel \
