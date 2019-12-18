@@ -6,4 +6,4 @@ script:
     - "./build.sh"
 cache:
     directories:
-        - $TRAVIS_BUILD_DIR/../work/multistrap
+        - $TRAVIS_BUILD_DIR/../cache
