@@ -1,6 +1,9 @@
 sudo: required
 services:
-- docker
+    - docker
 language: generic
 script:
-- "./build.sh"
+    - "./build.sh"
+cache:
+    directories:
+        - $TRAVIS_BUILD_DIR/../work/multistrap

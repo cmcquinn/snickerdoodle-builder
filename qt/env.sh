@@ -3,8 +3,8 @@
 set -x # echo commands
 
 # environment variables for the Qt build
-export QTSRCDIR="/tmp/qt5"
-export QTBUILDDIR="/tmp/qtbuild"
+export QTSRCDIR="${WORKDIR}/qt5"
+export QTBUILDDIR="${WORKDIR}/qtbuild"
 export MKSPECDIR="${QTSRCDIR}/qtbase/mkspecs/devices/linux-arm-xilinx-zynq-g++"
 export QTVERSION="v5.14.0"
 

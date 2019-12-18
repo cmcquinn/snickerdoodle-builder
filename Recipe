@@ -6,6 +6,16 @@ set -x # echo commands
 # setup environment
 source ./env.sh
 
+# check if the last build finished the multistrap and configure stage
+if [ -d ${ROOTFS}/etc/multistrap-success ]; then
+    echo "Using cached rootfs"
+else
+    if [ -d ${ROOTFS} ]; then
+        echo "Removing cached rootfs"
+        rm -rf ${ROOTFS}
+    fi
+fi
+
 # add machinekit keys to trusted keys dir
 mkdir -p ${ROOTFS}/etc/apt/trusted.gpg.d
 apt-key --keyring "${ROOTFS}/etc/apt/trusted.gpg.d/machinekit.gpg" adv --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv 43DDF224
@@ -24,6 +34,9 @@ mount -o bind ${PROJECTDIR} ${ROOTFS}/${PROJECTBASE}
 # run configurescript
 LC_ALL=C LANGUAGE=C LANG=C chroot ${ROOTFS} /bin/bash ${CONFIGDIR}/configscript.sh
 
+# create a file indicating that multistrap and dpkg --configure successfully completed
+touch ${ROOTFS}/etc/multistrap-success
+
 # unbind chroot mounts
 umount ${ROOTFS}/{sys,dev/pts,dev,${PROJECTBASE}}
 
@@ -38,7 +51,7 @@ else
 fi
 
 # create and partition disk image
-${UTILSDIR}/diskimage.py /tmp/multistrap
+${UTILSDIR}/diskimage.py ${WORKDIR}/multistrap
 
 # populate disk image
 
