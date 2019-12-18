@@ -7,19 +7,19 @@ set -x # echo commands
 source ${QTDIR}/env.sh
 
 # get the sources
-git clone https://github.com/qt/qt5.git $QTSRCDIR
-cd $QTSRCDIR
-git checkout $QTVERSION
-perl init-repository --module-subset=$MODULESUBSET
-mkdir -p $QTSRCDIR/$MKSPECDIR
-cp ${PROJECTDIR}/qt/{qmake.conf,qplatformdefs.h} $QTSRCDIR/$MKSPECDIR
+git clone https://github.com/qt/qt5.git ${QTSRCDIR}
+cd ${QTSRCDIR}
+git checkout ${QTVERSION}
+perl init-repository --module-subset=${MODULESUBSET}
+mkdir -p ${QTSRCDIR}/${MKSPECDIR}
+cp ${PROJECTDIR}/qt/{qmake.conf,qplatformdefs.h} ${MKSPECDIR}
 
 # prepare to build
-mkdir -p $QTBUILDDIR
-cd $QTBUILDDIR
+mkdir -p ${QTBUILDDIR}
+cd ${QTBUILDDIR}
 
 # run configure
-$QTSRCDIR/configure $CONFIGUREARGS $SKIPMODULES
+${QTSRCDIR}/configure ${CONFIGUREARGS} ${SKIPMODULES}
 
 # run build
 make -j`nproc`

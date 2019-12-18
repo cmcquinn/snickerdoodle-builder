@@ -11,10 +11,10 @@ echo "TRAVIS_BUILD_DIR: ${TRAVIS_BUILD_DIR}"
 docker run --privileged multiarch/qemu-user-static:register
 docker pull ${docker_image}
 docker rm ${project} &> /dev/null || true
-cd .. # cd to /home/travis/build/cmcquinn
-mkdir work
+cd ${TRAVIS_BUILD_DIR}/.. # cd to /home/travis/build/cmcquinn
+mkdir -p work
 workdir=$(realpath work)
-cd $OLDPWD # cd to previous working dir
+cd ${TRAVIS_BUILD_DIR}
 docker run --privileged --name ${project} -i \
      -v "${PWD}:/${project}" -v "${workdir}:/work" ${docker_image} \
      /bin/bash -c "cd ${project}; ./Recipe"
