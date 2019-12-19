@@ -19,8 +19,8 @@ mkdir -p ${QTBUILDDIR}
 cd ${QTBUILDDIR}
 
 # fix libpthread symlink
-mv ${ROOTFS}/usr/lib/arm-linux-gnueabihf/libpthread.so ${ROOTFS}/usr/lib/arm-linux-gnueabihf/libpthread.so.backup
-ln -s ${ROOTFS}/lib/arm-linux-gnueabihf/libpthread.so.0 ${ROOTFS}/usr/lib/arm-linux-gnueabihf/libpthread.so
+# mv ${ROOTFS}/usr/lib/arm-linux-gnueabihf/libpthread.so ${ROOTFS}/usr/lib/arm-linux-gnueabihf/libpthread.so.backup
+# ln -s ${ROOTFS}/lib/arm-linux-gnueabihf/libpthread.so.0 ${ROOTFS}/usr/lib/arm-linux-gnueabihf/libpthread.so
 
 # run configure
 ${QTSRCDIR}/configure ${CONFIGUREARGS} ${SKIPMODULES}
