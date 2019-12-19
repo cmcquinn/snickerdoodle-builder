@@ -29,7 +29,7 @@ umount ${ROOTFS}/{sys,dev/pts,dev,${PROJECTBASE}}
 
 # tar rootfs
 tar cJf ${WORKDIR}/rootfs.tar.xz ${ROOTFS}
-chmod a+rwx rootfs.tar.xz
+chmod a+rwx ${WORKDIR}/rootfs.tar.xz
 
 # build Qt5
 ${QTDIR}/qtbuild.sh
