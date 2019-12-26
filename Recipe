@@ -27,10 +27,6 @@ LC_ALL=C LANGUAGE=C LANG=C chroot ${ROOTFS} /bin/bash ${CONFIGDIR}/configscript.
 # unbind chroot mounts
 umount ${ROOTFS}/{sys,dev/pts,dev,${PROJECTBASE}}
 
-# tar rootfs
-tar cJf ${WORKDIR}/rootfs.tar.xz ${ROOTFS}
-chmod a+rwx ${WORKDIR}/rootfs.tar.xz
-
 # build Qt5
 ${QTDIR}/qtbuild.sh
 
@@ -42,10 +38,14 @@ else
 fi
 
 # create and partition disk image
-diskimage.py ${WORKDIR}/multistrap
+diskimage.py ${ROOTFS}
 
 # populate disk image
 
 # install additional files under /etc
+
+# tar rootfs
+tar cJf ${WORKDIR}/rootfs.tar.xz ${ROOTFS}
+chmod a+rwx ${WORKDIR}/rootfs.tar.xz
 
 # archive the rootfs and upload to github
