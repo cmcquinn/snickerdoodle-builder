@@ -20,6 +20,10 @@ curl -O https://raw.githubusercontent.com/openembedded/openembedded-core/master/
 chmod +x ./sysroot-relativelinks.py
 ./sysroot-relativelinks.py ${ROOTFS}
 
+# modify Qt Declarative build scripts to work with Python 3
+sed -i s/python/python3/g ${QTSRCDIR}/qtdeclarative/qtdeclarative.pro \
+                        ${QTSRCDIR}/qtdeclarative/src/3rdparty/masm/masm.pri
+
 # prepare to build
 mkdir -p ${QTBUILDDIR}
 cd ${QTBUILDDIR}
