@@ -14,6 +14,12 @@ perl init-repository --module-subset=${MODULESUBSET}
 mkdir -p ${MKSPECDIR}
 cp ${PROJECTDIR}/qt/{qmake.conf,qplatformdefs.h} ${MKSPECDIR}
 
+# convert absolute symlinks to relative symlinks
+cd ${WORKDIR}
+curl -O https://raw.githubusercontent.com/openembedded/openembedded-core/master/scripts/sysroot-relativelinks.py
+chmod +x ./sysroot-relativelinks.py
+./sysroot-relativelinks.py ${ROOTFS}
+
 # prepare to build
 mkdir -p ${QTBUILDDIR}
 cd ${QTBUILDDIR}
