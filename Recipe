@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -e # exit on error
 set -x # echo commands
 
 # setup environment
@@ -34,11 +33,11 @@ ${QTDIR}/qtbuild.sh
 if [ python3 -c "import parted" ]; then
     echo "Found pyparted"
 else
-    pip3 install pyparted
+    sudo apt install -y python3-parted
 fi
 
 # create and partition disk image
-diskimage.py ${ROOTFS}
+diskimage.py debian.iso --path ${ROOTFS}
 
 # populate disk image
 
