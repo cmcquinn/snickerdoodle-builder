@@ -34,7 +34,7 @@ ${QTDIR}/qtbuild.sh
 if [ python3 -c "import parted" ]; then
     echo "Found pyparted"
 else
-    pip3 install -r pyparted
+    pip3 install pyparted
 fi
 
 # create and partition disk image
