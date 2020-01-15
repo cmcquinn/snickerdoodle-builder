@@ -4,6 +4,6 @@ services:
     - docker
 language: generic
 before_install:
-    - sudo apt-get -y install python3-pip
+    - sudo apt-get -y install python3-pip qemu-user-static
 script:
     - "./build.sh"

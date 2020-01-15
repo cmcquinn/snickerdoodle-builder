@@ -2,9 +2,8 @@
 
 set -x # echo commands
 
-# set work dir to "/work" if it is not already set
-WORKDIR="${WORKDIR:-"/work"}"
-echo "WORKDIR set to ${WORKDIR}"
+# set work dir to "/work"
+WORKDIR="/work"
 
 # environment variables for the rootfs build system
 export PROJECTDIR="${PWD}"
