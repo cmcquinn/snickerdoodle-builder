@@ -31,7 +31,7 @@ umount ${ROOTFS}/{sys,dev/pts,dev,${PROJECTBASE}}
 ${QTDIR}/qtbuild.sh
 
 # check for pyparted
-if [[ python3 -c "import parted" ]]; then
+if [ $(python3 -c "import parted") ]; then
     echo "Found pyparted"
 else
     apt install -y python3-parted
