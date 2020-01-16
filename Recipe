@@ -1,11 +1,12 @@
 #!/bin/bash
 
-set -x # echo commands
+# set -x # echo commands
 
 # setup environment
 source ./env.sh
 
 # add machinekit keys to trusted keys dir
+apt update
 mkdir -p ${ROOTFS}/etc/apt/trusted.gpg.d
 apt-key --keyring "${ROOTFS}/etc/apt/trusted.gpg.d/machinekit.gpg" adv --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv 43DDF224
 
@@ -30,10 +31,10 @@ umount ${ROOTFS}/{sys,dev/pts,dev,${PROJECTBASE}}
 ${QTDIR}/qtbuild.sh
 
 # check for pyparted
-if [ python3 -c "import parted" ]; then
+if [[ python3 -c "import parted" ]]; then
     echo "Found pyparted"
 else
-    sudo apt install -y python3-parted
+    apt install -y python3-parted
 fi
 
 # create and partition disk image

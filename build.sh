@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x # echo commands
+# set -x # echo commands
 
 docker_image=cmcquinn/snickerdoodle-docker:rootfs
 project=snickerdoodle-builder

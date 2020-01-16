@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x # echo commands
+# set -x # echo commands
 
 # set work dir to "/work"
 WORKDIR="/work"
