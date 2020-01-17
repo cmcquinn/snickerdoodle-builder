@@ -20,7 +20,7 @@ export CONFIGUREARGS="-confirm-license \
 	-nomake \
 	examples \
 	-optimized-qmake \
-        -silent
+    -silent \
 	-device \
 	linux-arm-xilinx-zynq-g++ \
 	-device-option \
