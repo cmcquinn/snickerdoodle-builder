@@ -30,12 +30,8 @@ umount ${ROOTFS}/{sys,dev/pts,dev,${PROJECTBASE}}
 # build Qt5
 ${QTDIR}/qtbuild.sh
 
-# check for pyparted
-if [ $(python3 -c "import parted") ]; then
-    echo "Found pyparted"
-else
-    apt install -y python3-parted
-fi
+# install pyparted
+apt install -y python3-parted dosfstools
 
 # create and partition disk image
 diskimage.py debian.iso --path ${ROOTFS}
