@@ -21,6 +21,7 @@ export CONFIGUREARGS="-confirm-license \
 	examples \
 	-optimized-qmake \
     -silent \
+	-ccache
 	-device \
 	linux-arm-xilinx-zynq-g++ \
 	-device-option \

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# set -x # echo commands
+set -x # echo commands
 
 docker_image=cmcquinn/snickerdoodle-docker:rootfs
 project=snickerdoodle-builder
@@ -27,8 +27,9 @@ fi
 
 cd ${BUILDDIR}
 docker run --privileged --name ${project} -i \
-     -v "${PWD}:/${project}" -v "${WORKDIR}:/work" ${docker_image} \
-     /bin/bash -c "cd ${project}; ./Recipe"
+     -v "${PWD}:/${project}" -v "${WORKDIR}:/work" \
+     -v "${HOME}/.ccache:/ccache" -e CCACHE_DIR=/ccache \
+     ${docker_image} /bin/bash -c "cd ${project}; ./Recipe"
 
 git clone https://github.com/cmcquinn/python-utils.git
 pip3 install requests
