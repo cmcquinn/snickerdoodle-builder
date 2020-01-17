@@ -8,3 +8,4 @@ before_install:
 script:
     - "./build.sh"
 cache: ccache
+after_success: ccache --show-stats
