@@ -27,8 +27,8 @@ LC_ALL=C LANGUAGE=C LANG=C chroot ${ROOTFS} /bin/bash ${CONFIGDIR}/configscript.
 # unbind chroot mounts
 umount ${ROOTFS}/{sys,dev/pts,dev,${PROJECTBASE}}
 
-# build Qt5
-${QTDIR}/qtbuild.sh
+# # build Qt5
+# ${QTDIR}/qtbuild.sh
 
 # install pyparted
 apt install -y python3-parted dosfstools
